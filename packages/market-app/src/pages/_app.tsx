@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { ChakraProvider } from "@chakra-ui/react";
@@ -7,7 +6,6 @@ import type { AppProps } from "next/app";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
-import { Layout } from "../components/Layout";
 import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -27,9 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
         <ChakraProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </ChakraProvider>
       </RainbowKitProvider>
     </WagmiConfig>

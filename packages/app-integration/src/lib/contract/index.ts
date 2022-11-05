@@ -5,16 +5,25 @@ import { ethers } from "ethers";
 import deployments from "../../../../contracts/deployments.json";
 import { VerificationResistory, VerificationResistory__factory } from "../../../../contracts/typechain-types";
 
+export const verificationType = {
+  worldId: "0",
+};
+
 export class Contract {
-  signer: ethers.Signer;
   verificationResistory: VerificationResistory;
-  constructor(signer: ethers.Signer) {
-    this.signer = signer;
-    this.verificationResistory = VerificationResistory__factory.connect(deployments.verificationResistory, signer);
+  constructor(signerOrProvider: ethers.Signer | ethers.providers.Provider) {
+    this.verificationResistory = VerificationResistory__factory.connect(
+      deployments.verificationResistory,
+      signerOrProvider
+    );
   }
 
   verify = async (type: string, data: string) => {
-    this.verificationResistory.verify(type, data);
+    return this.verificationResistory.verify(type, data);
+  };
+
+  isVerified = async (type: string, sub: string) => {
+    return this.verificationResistory.isVerified(sub, type);
   };
 
   encodeWorldIdProof = (input: string, root: string, nullifierHash: string, proof: string) => {

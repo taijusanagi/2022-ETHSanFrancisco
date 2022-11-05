@@ -9,7 +9,9 @@ export const Layout: FC = ({ children }) => {
       <Header />
 
       <main>
-        <Container maxW="6xl">{children}</Container>
+        <Container maxW="2xl" py="4">
+          {children}
+        </Container>
       </main>
     </Stack>
   );

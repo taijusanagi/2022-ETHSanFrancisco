@@ -37,7 +37,7 @@ describe("WorldIDVerifier", function () {
     it("Should work", async function () {
       await registerIdentity();
       const [nullifierHash, proof] = await getProof(ACTION_ID, callerAddr);
-      const tx = await testWorldIDVerifier.verify(callerAddr, await getRoot(), nullifierHash, proof);
+      const tx = await testWorldIDVerifier.verifyByWorldId(callerAddr, await getRoot(), nullifierHash, proof);
       await tx.wait();
     });
 
@@ -46,7 +46,7 @@ describe("WorldIDVerifier", function () {
       const [nullifierHash, proof] = await getProof(ACTION_ID, callerAddr);
       // sample code is not working, so modified to check custom error
       await expect(
-        testWorldIDVerifier.verify(callerAddr, await getRoot(), nullifierHash, proof)
+        testWorldIDVerifier.verifyByWorldId(callerAddr, await getRoot(), nullifierHash, proof)
       ).to.be.revertedWithCustomError(worldID, "InvalidProof");
     });
   });

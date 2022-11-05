@@ -44,7 +44,7 @@ contract WorldIDVerifier {
   /// @param nullifierHash The nullifier for this proof, preventing double signaling, returned by the SDK.
   /// @param proof The zero knowledge proof that demostrates the claimer is registered with World ID, returned by the SDK.
   /// @dev Feel free to rename this method however you want! We've used `claim`, `verify` or `execute` in the past.
-  function _verify(address input, uint256 root, uint256 nullifierHash, uint256[8] calldata proof) internal {
+  function _verifyByWorldId(address input, uint256 root, uint256 nullifierHash, uint256[8] memory proof) internal {
     // first, we make sure this person hasn't done this before
     if (nullifierHashes[nullifierHash]) revert InvalidNullifier();
 

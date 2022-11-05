@@ -14,7 +14,7 @@ contract VerifiableNFTMarketplace is WorldIDVerifier {
 
   constructor(IWorldID _worldId, string memory _actionId) WorldIDVerifier(_worldId, _actionId) {}
 
-  function fulfill(ProofType proofType, bytes memory data) public {
+  function fulfill(bytes memory order, ProofType proofType, bytes memory data) public {
     if (proofType == ProofType.WorldId) {
       (address input, uint256 root, uint256 nullifierHash, uint256[8] memory proof) = abi.decode(
         data,

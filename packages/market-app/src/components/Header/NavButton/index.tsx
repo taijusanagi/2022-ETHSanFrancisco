@@ -14,6 +14,7 @@ export const NavButton: FC<ButtonProps> = ({ children, onClick }) => {
         bg: "#121212",
       }}
       onClick={onClick}
+      size="sm"
     >
       {children}
     </Button>

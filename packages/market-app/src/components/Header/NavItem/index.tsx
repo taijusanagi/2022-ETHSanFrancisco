@@ -5,7 +5,7 @@ import { FC } from "react";
 export const NavItem: FC<LinkProps> = ({ children, href }) => (
   <NextLink href={href} passHref>
     <Link style={{ color: "#BB86FC", cursor: "pointer" }}>
-      <Text color="#fff" fontSize={[16, 16, 16, 18]} fontWeight={600} display="block" width="auto">
+      <Text color="#fff" fontSize={"md"} fontWeight={600} display="block" width="auto">
         {children}
       </Text>
     </Link>
@@ -25,7 +25,7 @@ export const NavDrawerItem: FC<LinkProps & { onClick: () => void }> = ({ childre
     >
       <Text
         color="#fff"
-        fontSize={20}
+        fontSize={"lg"}
         py={2}
         px={2}
         _hover={{

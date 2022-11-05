@@ -1,6 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Flex, HStack, Stack, Text } from "@chakra-ui/layout";
-import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Link, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  HStack,
+  Icon,
+  Link,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { InformationCircleIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import NextLink from "next/link";
@@ -11,54 +24,39 @@ import { NavDrawerItem, NavItem } from "./NavItem";
 export const Header = () => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
+  const name = "vMarket";
+
   const navItems = [
     {
-      text: "home",
+      text: "buy",
       href: "/",
     },
     {
-      text: "about",
-      href: "/about",
-      icon: <InformationCircleIcon className="h-6 w-6" />,
-    },
-    {
-      text: "404 page",
-      href: "/error",
+      text: "sell",
+      href: "/mypage",
       icon: <InformationCircleIcon className="h-6 w-6" />,
     },
   ];
 
   return (
     <header>
-      <Stack direction={["column", "column", "row"]} px={2} py={4}>
-        <HStack justifyContent={["space-between"]} w={"full"} px={{ base: 0, lg: "2rem" }}>
+      <Stack direction={["column", "column", "row"]} px={4} py={4}>
+        <HStack justifyContent={["space-between"]} w={"full"}>
           <Box fontWeight="bold" fontSize={[20, 20, 20]}>
             <NextLink href="/" passHref>
-              <Link className="center flex gap-2">
-                <span>👽</span>
-                <span className="text-xl">ilyxium</span>
-              </Link>
+              <Link>{name}</Link>
             </NextLink>
           </Box>
 
-          <HStack>
-            <HStack
-              px={[4, 4, 0]}
-              display={["none", "none", "none", "flex"]}
-              gap={{ lg: "0.4rem", xl: "1.5rem" }}
-              mr={4}
-            >
+          <HStack spacing="2">
+            <HStack display={["none", "none", "none", "flex"]} mr="6" spacing="4">
               {navItems.map((navItem, index) => (
                 <NavItem key={index} href={navItem.href}>
-                  <Text className="capitalize">{navItem.text}</Text>
+                  <Text>{navItem.text}</Text>
                 </NavItem>
               ))}
             </HStack>
-
-            {/* Connect Wallet Button */}
-            <ConnectButton />
-
-            {/* Drawer Toggle Button */}
+            <ConnectButton accountStatus={"address"} />
             <Button
               backgroundColor="transparent"
               display={["flex", "flex", "flex", "none"]}
@@ -66,10 +64,13 @@ export const Header = () => {
               _hover={{
                 backgroundColor: "#121212",
               }}
-              borderRadius="100%"
+              borderRadius="full"
               onClick={onOpen}
+              size="xs"
+              fontSize="md"
+              p="0"
             >
-              {isOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+              {isOpen ? <Icon as={XIcon} /> : <Icon as={MenuIcon} />}
             </Button>
           </HStack>
         </HStack>
@@ -91,11 +92,8 @@ export const Header = () => {
               marginBottom="3rem"
               fontSize={[20, 20, 20]}
             >
-              <NextLink href="/">
-                <Link className="center flex gap-2">
-                  <span>👽</span>
-                  <span className="text-xl">ilyxium</span>
-                </Link>
+              <NextLink href="/" passHref>
+                <Link>{name}</Link>
               </NextLink>
 
               {/* Wallet and Close Button Wrapper */}
@@ -120,25 +118,12 @@ export const Header = () => {
             {navItems.map((navItem, index) => (
               <NavDrawerItem onClick={onToggle} key={index} href={navItem.href}>
                 <Flex alignItems="center" gap={2}>
-                  <Text padding="0" fontSize={"2rem"}>
+                  <Text padding="0" fontSize={""}>
                     {navItem.text}
                   </Text>
                 </Flex>
               </NavDrawerItem>
             ))}
-            {/* Twitter Wrapper */}
-            <Flex
-              width="100%"
-              justify="space-between"
-              bottom="2rem"
-              alignItems="center"
-              left="0"
-              paddingX="1.5rem"
-              position="absolute"
-            >
-              {/* Twitter Link - URL SHOULD BE UPDATED */}
-              <SocialIcon bgColor="white" url="https://twitter.com/ilyxium" target="_blank" />
-            </Flex>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

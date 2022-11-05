@@ -1,10 +1,23 @@
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-dependency-compiler";
 
+import fs from "fs";
 import { HardhatUserConfig } from "hardhat/config";
+
+import rpc from "./config/rpc.json";
+
+const mnemonic = fs.readFileSync("../../mnemonic.txt", "ascii").trim();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
+  networks: {
+    polygonMumbai: {
+      url: rpc.polygonMumbai,
+      accounts: {
+        mnemonic,
+      },
+    },
+  },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",

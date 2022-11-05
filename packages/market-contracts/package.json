@@ -4,10 +4,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "patch-package",
-    "lint": "eslint '**/*.{js,ts}' --ignore-path .gitignore",
     "test": "hardhat test",
-    "build": "hardhat compile"
+    "build": "hardhat compile",
+    "lint": "eslint '**/*.{js,ts}' --ignore-path .gitignore",
+    "prettier": "prettier '**/*.{json,md}' --ignore-path .gitignore --write"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",

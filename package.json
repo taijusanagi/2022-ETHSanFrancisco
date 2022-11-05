@@ -11,12 +11,18 @@
   "scripts": {
     "prepare": "husky install",
     "postinstall": "patch-package",
-    "lint": "run-p lint:*",
-    "lint:market-contracts": "yarn workspace market-contracts lint",
     "test": "run-p test:*",
     "test:market-contracts": "yarn workspace market-contracts test",
+    "dev": "run-p build:*",
+    "dev:market-app": "yarn workspace market-contracts dev",
     "build": "run-p build:*",
-    "build:market-contracts": "yarn workspace market-contracts build"
+    "build:market-contracts": "yarn workspace market-contracts build",
+    "lint": "run-p lint:*",
+    "lint:market-app": "yarn workspace market-app lint",
+    "lint:market-contracts": "yarn workspace market-contracts lint",
+    "prettier": "run-p prettier:*",
+    "prettier:market-app": "yarn workspace market-app prettier",
+    "prettier:market-contracts": "yarn workspace market-contracts prettier"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

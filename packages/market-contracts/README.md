@@ -1,13 +1,17 @@
-# Sample Hardhat Project
+# Market Contracts
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+Using
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
 ```
+npx harthat init
+```
+
+as a quickstart
+
+## Reference
+
+As described in the main [README](../../README.md), the following codes used as references
+
+- https://github.com/worldcoin/world-id-starter-hardhat/blob/main/contracts/Contract.sol
+
+- https://wiki.polygon.technology/docs/polygonid/verifier/on-chain-verification/overview

@@ -8,7 +8,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
-import { Page } from "../components/Page";
+import { Layout } from "../components/Layout";
 import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -34,9 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
         <ChakraProvider theme={theme}>
-          <Page>
+          <Layout>
             <Component {...pageProps} />
-          </Page>
+          </Layout>
         </ChakraProvider>
       </RainbowKitProvider>
     </WagmiConfig>

@@ -16,6 +16,7 @@
     "dev": "run-p build:*",
     "dev:market-app": "yarn workspace market-contracts dev",
     "build": "run-p build:*",
+    "build:market-app": "yarn workspace market-app build",
     "build:market-contracts": "yarn workspace market-contracts build",
     "lint": "run-p lint:*",
     "lint:market-app": "yarn workspace market-app lint",
@@ -39,5 +40,8 @@
   },
   "dependencies": {
     "@worldcoin/world-id-contracts": "^0.1.1"
+  },
+  "resolutions": {
+    "@types/react": "17.0.39"
   }
 }

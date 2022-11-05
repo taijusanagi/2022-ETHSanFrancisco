@@ -1,20 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+import "./interfaces/IVerificationResistory.sol";
 import "./WorldIDVerifier.sol";
 
-contract VerifiableNFTMarketplace is WorldIDVerifier {
-  event Fulfilled();
-
-  enum ProofType {
-    None,
-    WorldId,
-    PolygonId
-  }
-
+contract VerificationResistory is IVerificationResistory, WorldIDVerifier {
   constructor(IWorldID _worldId, string memory _actionId) WorldIDVerifier(_worldId, _actionId) {}
 
-  function fulfill(bytes memory order, ProofType proofType, bytes memory data) public {
+  mapping(address => mapping(ProofType => bool)) internal _isVerified;
+
+  function verify(ProofType proofType, bytes memory data) public override {
     if (proofType == ProofType.WorldId) {
       (address input, uint256 root, uint256 nullifierHash, uint256[8] memory proof) = abi.decode(
         data,
@@ -24,6 +19,9 @@ contract VerifiableNFTMarketplace is WorldIDVerifier {
     } else if (proofType == ProofType.PolygonId) {
       //TODO: integrate polygon ID
     }
-    emit Fulfilled();
+  }
+
+  function isVerified(address sub, ProofType proofType) public view override returns (bool) {
+    return _isVerified[sub][proofType];
   }
 }

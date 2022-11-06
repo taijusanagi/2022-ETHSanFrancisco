@@ -9,7 +9,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { chains, provider } = configureChains([chain.goerli, chain.polygonMumbai], [publicProvider()]);
+  const { chains, provider } = configureChains([chain.polygonMumbai], [publicProvider()]);
   const { connectors } = getDefaultWallets({
     appName: "Market App",
     chains,

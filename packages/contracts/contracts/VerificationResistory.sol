@@ -68,15 +68,6 @@ contract VerificationResistory is WorldIDVerifier, ZKPVerifier {
     _verify(sub, ProofType.WorldId);
   }
 
-  function encodeWorldIdProof(
-    address input,
-    uint256 root,
-    uint256 nullifierHash,
-    uint256[8] memory proof
-  ) public pure returns (bytes memory) {
-    return abi.encode(input, root, nullifierHash, proof);
-  }
-
   /*
    * polygon id integration
    */

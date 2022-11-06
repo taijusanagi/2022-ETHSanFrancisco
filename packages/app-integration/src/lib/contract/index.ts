@@ -19,20 +19,16 @@ export class Contract {
     );
   }
 
-  verify = async (type: string, data: string) => {
-    return this.verificationResistory.verify(type, data);
-  };
-
-  isVerified = async (type: string, sub: string) => {
-    return this.verificationResistory.isVerified(sub, type);
-  };
-
-  encodeWorldIdProof = (input: string, root: string, nullifierHash: string, proof: string) => {
-    return this.verificationResistory.encodeWorldIdProof(
+  verifyWithWorldId = async (input: string, root: string, nullifierHash: string, proof: string) => {
+    return this.verificationResistory.verifyWithWorldId(
       input,
       root,
       nullifierHash,
       abi.decode(["uint256[8]"], proof)[0]
     );
+  };
+
+  isVerified = async (type: string, sub: string) => {
+    return this.verificationResistory.isVerified(sub, type);
   };
 }

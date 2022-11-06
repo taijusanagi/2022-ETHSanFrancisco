@@ -1,4 +1,5 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
+import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import { VerificationResponse, WidgetProps } from "@worldcoin/id";
 import type { GetServerSideProps, NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -48,13 +49,12 @@ const Home: NextPage<HomeProps> = ({ worldId, polygonId }) => {
       return;
     }
     try {
-      const data = await contract.encodeWorldIdProof(
+      await contract.verifyWithWorldId(
         address,
         worldIdVerificationResponse.merkle_root,
         worldIdVerificationResponse.nullifier_hash,
         worldIdVerificationResponse.proof
       );
-      await contract.verify(verificationType.worldId, data);
       setIsWorldIdVerified(true);
     } catch (e) {
       console.error(e);
@@ -65,13 +65,26 @@ const Home: NextPage<HomeProps> = ({ worldId, polygonId }) => {
     if (!contract || !address) {
       return;
     }
-    contract
-      .isVerified(verificationType.worldId, address)
-      .then((isWorldIdVerified) => setIsWorldIdVerified(isWorldIdVerified));
 
-    contract
-      .isVerified(verificationType.polygonId, address)
-      .then((isPolygonIdVerified) => setIsPolygonIdVerified(isPolygonIdVerified));
+    const checkWorldId = setInterval(() => {
+      contract.isVerified(verificationType.worldId, address).then((isWorldIdVerified) => {
+        console.log("isWorldIdVerified", isWorldIdVerified);
+        setIsWorldIdVerified(isWorldIdVerified);
+        if (isWorldIdVerified) {
+          clearInterval(checkWorldId);
+        }
+      });
+    }, 5000);
+
+    const checkPolygonId = setInterval(() => {
+      contract.isVerified(verificationType.polygonId, address).then((isPolygonIdVerified) => {
+        console.log("isPolygonIdVerified", isPolygonIdVerified);
+        setIsPolygonIdVerified(isPolygonIdVerified);
+        if (isPolygonIdVerified) {
+          clearInterval(checkPolygonId);
+        }
+      });
+    }, 5000);
   }, [contract, address]);
 
   return (
@@ -104,7 +117,7 @@ const Home: NextPage<HomeProps> = ({ worldId, polygonId }) => {
                       />
                     )}
                     {worldIdVerificationResponse && (
-                      <Button onClick={register} disabled={!worldIdVerificationResponse}>
+                      <Button onClick={register} disabled={!worldIdVerificationResponse} colorScheme="blue">
                         Register
                       </Button>
                     )}

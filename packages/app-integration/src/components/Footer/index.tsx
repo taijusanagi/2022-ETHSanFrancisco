@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <footer>
       <Flex p={4} justify="center">
-        <Text fontSize="x-small">Qhira Protect @ETHSanFrancisco</Text>
+        <Text fontSize="x-small"></Text>
       </Flex>
     </footer>
   );

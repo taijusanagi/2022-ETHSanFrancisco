@@ -21,6 +21,12 @@ For this hackathon, selected identity-proof providers are
 - The main reference of this implementation is the following.
   - https://wiki.polygon.technology/docs/polygonid/verifier/on-chain-verification/overview
 
+#### Claim Credential
+
+This credential is used for the demo
+
+https://platform-test.polygonid.com/claim-link/d172aa65-f661-4a5e-9ece-3577ceae9b93
+
 ## App
 
 This is a simple NFT marketplace frontend.

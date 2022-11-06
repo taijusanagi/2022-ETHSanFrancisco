@@ -7,6 +7,7 @@ import { VerificationResistory, VerificationResistory__factory } from "../../../
 
 export const verificationType = {
   worldId: "0",
+  polygonId: "1",
 };
 
 export class Contract {

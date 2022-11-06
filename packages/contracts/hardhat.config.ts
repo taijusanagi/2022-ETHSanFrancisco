@@ -11,6 +11,12 @@ const mnemonic = fs.readFileSync("../../mnemonic.txt", "ascii").trim();
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
   networks: {
+    hardhat: {
+      // polygon id testing requires fork environment
+      forking: {
+        url: rpc.polygonMumbai,
+      },
+    },
     polygonMumbai: {
       url: rpc.polygonMumbai,
       accounts: {

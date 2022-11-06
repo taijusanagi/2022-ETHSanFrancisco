@@ -67,6 +67,7 @@ const Home: NextPage<HomeProps> = ({ worldId }) => {
             <Text size="sm" fontWeight={"bold"}>
               WorldID
             </Text>
+            <Text size="xs">Please verify you are a real person</Text>
             {address && (
               <>
                 {!isWorldIdVerified && (
@@ -101,12 +102,12 @@ const Home: NextPage<HomeProps> = ({ worldId }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const ipfsHash = context.query;
-
+  const { ipfsHash } = context.query;
+  const data = { worldId: true };
   // TODO: implement
-  console.log("fetch data from", ipfsHash);
+  console.log("fetch data from", ipfsHash, data);
 
   return {
-    props: { worldId: true },
+    props: data,
   };
 };
